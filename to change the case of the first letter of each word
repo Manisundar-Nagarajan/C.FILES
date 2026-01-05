@@ -1,0 +1,29 @@
+// Program to change the case of the first letter of each word using Files concept
+#include<stdio.h>
+int main()
+{
+        FILE *fs=fopen("data.txt","r+");
+        char ch;
+        ch=fgetc(fs);
+        if(ch>='a' && ch<='z')
+        {
+                ch^=32;
+                fseek(fs,-1,1);
+                fputc(ch,fs);
+        }
+        while((ch=fgetc(fs))!=EOF)
+        {
+                if((ch==' ') || (ch=='\n'))
+                {
+                        ch=fgetc(fs);
+                        if(ch>='a' && ch<='z')
+                        {
+                                fseek(fs,-1,1);
+                                ch^=32;
+                                fputc(ch,fs);
+                        }
+                }
+        }
+        fclose(fs);
+}
+
